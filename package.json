@@ -2,7 +2,6 @@
   "name": "iss-gateway",
   "description": "ISS Gateway for Domoticz",
   "version": "0.0.1",
-  "private": true,
   "author": "Yohann Ciurlik <spawnrider@gmail.com>",
   "contributors": [
     {

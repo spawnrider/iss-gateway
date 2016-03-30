@@ -10,6 +10,9 @@ var system = require('./routes/system');
 var devices = require('./routes/devices');
 var rooms = require('./routes/rooms');
 
+var path = require('path');
+var directory = path.resolve(__dirname);
+
 var app = express();
 
 /* Configuration entries are read from command line, from environment and from Config file */
@@ -18,12 +21,12 @@ nconf.argv()
 
 nconf.add('user', {
   type: 'file',
-  file: 'config.json'
+  file: directory + '/config.json'
 });
 
 nconf.add('package', {
   type: 'file',
-  file: 'package.json'
+  file: directory + 'package.json'
 });
 
 nconf.load();
