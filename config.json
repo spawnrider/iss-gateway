@@ -1,0 +1,16 @@
+{
+  "port": 8000,
+  "debug": false,
+  "domoticz": {
+    "ssl": false,
+    "host": "host_or_ip_of_domoticz",
+    "port": 8080,
+    "auth": {
+      "username": "admin",
+      "password": "admin"
+    },
+    "path": "/",
+    "user-agent": "ISS-Gateway",
+    "url_cam_video": "video/mjpg.cgi"
+  }
+}
