@@ -15,34 +15,45 @@ var directory = path.resolve(__dirname);
 
 var app = express();
 
-/* Configuration entries are read from command line, from environment and from Config file */
+var globalConfigFile = '/etc/iss-gateway.json';
+
+/* Configuration entries are read from :
+- Command line, 
+- Environment,
+- User config file /etc/iss-gateway.json
+- Finally from Global config file 
+*/
+
 nconf.argv()
-  .env();
+    .env();
 
-nconf.add('user', {
-  type: 'file',
-  file: directory + '/config.json'
+nconf.file('user', {
+    type: 'file',
+    file: globalConfigFile
 });
 
-nconf.add('package', {
-  type: 'file',
-  file: directory + 'package.json'
+nconf.file('global', {
+    type: 'file',
+    file: directory + '/config.json'
 });
 
-nconf.load();
+nconf.file('package', {
+    type: 'file',
+    file: directory + '/package.json'
+});
 
-console.log("----------------------------------------------------------------------");
+console.log("------------------------------------------------------------------------------------");
 console.log("ISS-Gateway for Domoticz v" + nconf.get('version'));
-console.log("Config file is " + path.resolve(__dirname, 'config.json'));
+console.log("Global config file is " + path.resolve(__dirname, 'config.json'));
+console.log("User config must be placed in " + globalConfigFile);
 console.log("Domoticz is configured on " + domoticz.getURL());
-
-console.log("----------------------------------------------------------------------");
+console.log("------------------------------------------------------------------------------------");
 
 if (nconf.get("debug") === true)
-  app.use(logger('dev'));
+    app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+    extended: false
 }));
 
 /* For all ImperiHome Standard System API routes */
@@ -54,18 +65,18 @@ app.use('/rooms', rooms);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Not found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.send({
-    message: err.message,
-    error: err
-  });
+    res.status(err.status || 500);
+    res.send({
+        message: err.message,
+        error: err
+    });
 });
 
 
