@@ -66,6 +66,20 @@ $ sudo pm2 startup systemd
 ```
 Is it possible to specify an user by adding -u <username> at the end of the startup command.
 
+## Update an existing installation
+If you have already installed a previous version of ISS-Gateway, to update do : 
+```
+$ sudo npm update iss-gateway -g
+```
+Then, reload the current running instance :
+```
+$ pm2 reload iss-gateway
+[PM2] Reloading process by name iss-gateway
+[PM2][WARN] iss-gateway app can't be reloaded - restarting it
+[PM2] restartProcessId process id 0
+[PM2] All processes reloaded
+```
+
 ## Configuration
 [TO BE DONE]
 See the config.json file.
