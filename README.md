@@ -11,6 +11,7 @@ ISS-Gateway is a fork and also a portage from [ISS-Domo](https://github.com/bobi
 - [ ] And so one...
 
 ## Installation
+[![asciicast](https://asciinema.org/a/41059.png)](https://asciinema.org/a/41059)
 Start by installing it using NPM : 
 ```
 $ sudo npm install iss-gateway -g
