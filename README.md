@@ -5,7 +5,7 @@ ISS-Gateway is a fork and also a portage from [ISS-Domo](https://github.com/bobi
 
 ### Todo-list
 - [ ] Better manage user configuration (create user config file if not exist)
-- [ ] Add security layer on top of ISS-Gateway (actually Auth BASIC is not implemented)
+- [x] Add AUTH Basic security layer on top of ISS-Gateway
 - [ ] Better implementation of DevThermostat (actually only Heating Point is functional)
 - [ ] Add history system and change graphable attribue to true
 - [ ] And so one...
@@ -83,7 +83,28 @@ $ pm2 reload iss-gateway
 
 ## Configuration
 [TO BE DONE]
-See the config.json file.
+See the config.json file below : 
+```{
+    "port": 8000,
+    "debug": false,
+    "auth": null,
+    "domoticz": {
+        "ssl": false,
+        "host": "host_or_ip_of_domoticz",
+        "port": 8080,
+        "auth": {
+            "username": "admin",
+            "password": "admin"
+        },
+        "path": "/",
+        "user-agent": "ISS-Gateway",
+        "url_cam_video": "video/mjpg.cgi"
+    }
+}```
+### Add authentication to ISS-Gateway
+Set a username/password object to the 'auth' root node and specify an username and an password value: 
+
+```auth: { "username": "admin", "password": "admin" }```
 
 # API and objects definition 
 * ImperiHome Standard System API : http://dev.evertygo.com/api/iss
