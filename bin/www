@@ -8,7 +8,6 @@ var app = require('../app');
 var debug = require('debug')('iss-gateway:server');
 var http = require('http');
 var nconf = require('nconf');
-var shell = require("shelljs");
 
 var port = nconf.get('port');
 app.set('port', port);
@@ -64,5 +63,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  shell.exec('echo Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

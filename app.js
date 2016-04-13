@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
+var basicAuth = require('basic-auth');
 
 var domoticz = require('./helpers/domoticz');
 
@@ -56,12 +57,43 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+/**
+ * Authentication method for all API routes
+ * @param {object}   req  Request
+ * @param {object}   res  Result
+ * @param {[[Type]]} next Next function
+ */
+var auth = function (req, res, next) {
+    if (!nconf.get("auth") || nconf.get("auth") === null) {
+        console.log("No authentication provided");
+        next();
+        return;
+    }
+
+    var username = nconf.get("auth:username");
+    var password = nconf.get("auth:password");
+
+    var user = basicAuth(req);
+    if (!user || !user.name || !user.pass) {
+        res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+        res.sendStatus(401);
+        return;
+    }
+    if (user.name === username && user.pass === password) {
+        next();
+    } else {
+        res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+        res.sendStatus(401);
+        return;
+    }
+}
+
 /* For all ImperiHome Standard System API routes */
 /* See http://dev.evertygo.com/api/iss# */
-app.use('/', system);
-app.use('/system', system);
-app.use('/devices', devices);
-app.use('/rooms', rooms);
+app.use('/', auth, system);
+app.use('/system', auth, system);
+app.use('/devices', auth, devices);
+app.use('/rooms', auth, rooms);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,7 +1,7 @@
 {
   "name": "iss-gateway",
   "description": "ISS Gateway for Domoticz",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Yohann Ciurlik <spawnrider@gmail.com>",
   "contributors": [
     {
@@ -33,13 +33,13 @@
     "iss-gateway": "./bin/www"
   },
   "dependencies": {
+    "basic-auth": "^1.0.3",
     "body-parser": "~1.13.2",
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
     "nconf": "^0.8.4",
     "q": "^1.4.1",
-    "request-promise": "^2.0.1",
-    "shelljs": "^0.6.0"
+    "request-promise": "^2.0.1"
   }
 }
