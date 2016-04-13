@@ -83,8 +83,10 @@ $ pm2 reload iss-gateway
 
 ## Configuration
 [TO BE DONE]
+
 See the config.json file below : 
-```{
+```
+{
     "port": 8000,
     "debug": false,
     "auth": null,
@@ -100,7 +102,9 @@ See the config.json file below :
         "user-agent": "ISS-Gateway",
         "url_cam_video": "video/mjpg.cgi"
     }
-}```
+}
+```
+
 ### Add authentication to ISS-Gateway
 Set a username/password object to the 'auth' root node and specify an username and an password value: 
 
@@ -112,7 +116,7 @@ Set a username/password object to the 'auth' root node and specify an username a
 * Domoticz API : https://www.domoticz.com/wiki/Domoticz_API/JSON_URL's
 
 ## CHANGELOG
-[TO BE DONE]
+* v0.0.7 - Auth Basic mechanism
 
 #### Author: [Yohann Ciurlik](http://spawnrider.net)
 #### License: MIT
