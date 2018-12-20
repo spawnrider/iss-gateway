@@ -35,7 +35,7 @@
   "dependencies": {
     "basic-auth": "^1.0.3",
     "body-parser": "~1.13.2",
-    "debug": "~2.2.0",
+    "debug": ">=2.6.9",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
     "nconf": "^0.8.4",
